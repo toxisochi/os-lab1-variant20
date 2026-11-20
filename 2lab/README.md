@@ -6,9 +6,11 @@
 
 ```bash
 g++ -std=c++17 -O2 -Wall -Wextra -pthread 2lab.cpp -o 2lab
-./2lab -s < points.txt       # последовательная версия
-./2lab -t 12 < points.txt    # параллельная версия
+./2lab -s < points_large.txt       # последовательная версия
+./2lab -t 12 < points_large.txt    # параллельная версия
 ```
+
+points.txt — маленький пример из 4 точек. points_large.txt — набор из 2000 точек для сравнения времени.
 
 Ввод: число точек `n`, затем `n` троек `x y z`.
 Вывод: индексы трёх точек (с нуля), площадь, число потоков и время в мс.
@@ -18,7 +20,7 @@ g++ -std=c++17 -O2 -Wall -Wextra -pthread 2lab.cpp -o 2lab
 Проверка числа потоков на большом входе:
 
 ```bash
-./2lab -t 12 < checks/full_results/points_2000.txt > result.txt &
+./2lab -t 12 < points_large.txt > result.txt &
 pid=$!
 ps -L -p "$pid" -o pid,lwp,nlwp,comm
 wait "$pid"
